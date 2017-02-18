@@ -30,12 +30,13 @@ public class Hero
     int resChange = 0;
 
     boolean alive = true;
-    
+
     String classes;
-    
+
     Weapon weapon;
 
-    public Hero(String name, int x, int y, int hp, int atk, int spd, int def, int res, String classes, String weapon)
+
+    public Hero( String name, int x, int y, int hp, int atk, int spd, int def, int res, String classes, String weapon )
     {
         this.name = name;
         this.x = x;
@@ -47,38 +48,51 @@ public class Hero
         this.def = def;
         this.res = res;
         this.classes = classes;
-        this.weapon = new Weapon(weapon, this);
+        this.weapon = new Weapon( weapon, this );
     }
+
 
     void takeDamage( int damageTaken )
     {
         if ( damageTaken <= 0 )
         {
-            System.out.println(  "   " + name + " has taken 0 damage!" );
+            System.out.println( "   " + name + " has taken 0 damage!" );
             return;
         }
         if ( damageTaken > 0 )
         {
             hp = hp - damageTaken;
-            System.out.println(  "   " + name + " has taken " + damageTaken + " damage!" );
+            System.out.println( "   " + name + " has taken " + damageTaken + " damage!" );
         }
         if ( hp < 0 )
         {
-            System.out.println(  "   " + name + " has been defeated!" );
+            System.out.println( "   " + name + " has been defeated!" );
             alive = false;
         }
     }
 
+
+    void heal( int healValue )
+    {
+        hp = hp + healValue;
+        if ( hp > maxHp )
+        {
+            hp = maxHp;
+        }
+    }
+
+
     void printStats()
     {
-        System.out.println(name);
-        System.out.println("Hp: " +  getHp() + "/" + maxHp);
-        System.out.println("Atk: " + getAtk());
-        System.out.println("Spd: " + getSpd());
-        System.out.println("Def: " + getDef());
-        System.out.println("Res: " + getRes());
+        System.out.println( name );
+        System.out.println( "Hp: " + getHp() + "/" + maxHp );
+        System.out.println( "Atk: " + getAtk() );
+        System.out.println( "Spd: " + getSpd() );
+        System.out.println( "Def: " + getDef() );
+        System.out.println( "Res: " + getRes() );
     }
     // getters/setters
+
 
     public String getName()
     {
@@ -199,21 +213,25 @@ public class Hero
         this.resChange = this.resChange + resChange;
     }
 
+
     public boolean isAlive()
     {
         return alive;
     }
+
 
     public void setAlive( boolean alive )
     {
         this.alive = alive;
     }
 
+
     public String getClasses()
     {
         return classes;
     }
-    
+
+
     public Weapon getWeapon()
     {
         return weapon;

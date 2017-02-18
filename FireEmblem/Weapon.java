@@ -3,131 +3,151 @@ package FireEmblem;
 public class Weapon
 {
     int range = 0;
+
     int weaponAtk = 0;
-    boolean brave = false;//fk Raven
-    char killer = ' ';//fk Merric
-    char adv = ' ';//fk Robin
-    boolean counter = false;//fk lobster
-    char color = ' ';
+
+    boolean brave = false;// fk Raven
+
+    String killer = "N";// fk Merric
+
+    String adv = "N";// fk Robin
+
+    boolean counter = false;// fk lobster
+
+    String color = "";
+
     String name = "";
+
     boolean physical;
+
     Hero hero;
-    
-    public Weapon(String name, Hero hero)
+
+
+    public Weapon( String name, Hero hero )
     {
         this.name = name;
         this.hero = hero;
-        if (name.equals( "Excalibur" ))
+        if ( name.equals( "Excalibur" ) )
         {
             range = 2;
             weaponAtk = 14;
-            killer = 'F';
+            killer = "F";
             physical = false;
-            color = 'G';
+            color = "G";
         }
-        else if (name.equals( "Blarraven+" ))
+        else if ( name.equals( "Blarraven+" ) )
         {
             range = 2;
             weaponAtk = 11;
-            adv = 'W';
+            adv = "W";
             physical = false;
-            color = 'B';
+            color = "B";
         }
-        else if (name.equals( "Flametoungue+" ))
+        else if ( name.equals( "Flametoungue+" ) )
         {
             range = 1;
             weaponAtk = 15;
             physical = false;
-            color = 'R';
+            color = "R";
         }
-        else if (name.equals( "Brave Axe+" ))
+        else if ( name.equals( "Brave Axe+" ) )
         {
             range = 1;
             weaponAtk = 8;
             brave = true;
             physical = true;
-            color = 'G';
+            color = "G";
             hero.setSpdChange( -5 );
         }
-        else if (name.equals( "Raijinto" ))
+        else if ( name.equals( "Raijinto" ) )
         {
             range = 1;
             weaponAtk = 16;
             counter = true;
             physical = true;
-            color = 'R';
+            color = "R";
         }
-        else if (name.equals( "Noatun" ))
+        else if ( name.equals( "Noatun" ) )
         {
             range = 1;
             weaponAtk = 16;
             physical = true;
-            color = 'G';
+            color = "G";
         }
-        else if (name.equals( "Fensalir" ))
+        else if ( name.equals( "Fensalir" ) )
         {
             range = 1;
             weaponAtk = 16;
             physical = true;
-            color = 'B';
+            color = "B";
         }
-        else if (name.equals("Folkvangr"))
+        else if ( name.equals( "Folkvangr" ) )
         {
             range = 1;
             weaponAtk = 16;
             physical = true;
-            color = 'R';
+            color = "R";
         }
-            
+
     }
+
 
     public int getRange()
     {
         return range;
     }
 
+
     public void setRange( int range )
     {
         this.range = range;
     }
+
 
     public int atk()
     {
         return weaponAtk;
     }
 
+
     public boolean isBrave()
     {
         return brave;
     }
 
-    public char getKiller()
+
+    public String getKiller()
     {
         return killer;
     }
 
-    public char getAdv()
+
+    public String getAdv()
     {
         return adv;
     }
+
 
     public boolean isCounter()
     {
         return counter;
     }
 
-    public char getColor()
+
+    public String getColor()
     {
         return color;
     }
+
 
     public String getName()
     {
         return name;
     }
 
+
     public boolean isPhysical()
     {
         return physical;
-    }    
+    }
 }
