@@ -2,8 +2,9 @@ package FireEmblem;
 
 public class Hero
 {
-    String name;
-
+    String name; 
+    
+    //location
     int x;
 
     int y;
@@ -51,27 +52,27 @@ public class Hero
         this.weapon = new Weapon( weapon, this );
     }
 
-
+    //takes damageTaken damage. 
     void takeDamage( int damageTaken )
     {
-        if ( damageTaken <= 0 )
+        if ( damageTaken <= 0 )//you cant take negative damage
         {
             System.out.println( "   " + name + " has taken 0 damage!" );
             return;
         }
-        if ( damageTaken > 0 )
+        if ( damageTaken > 0 )//hits for damageTaken
         {
             hp = hp - damageTaken;
             System.out.println( "   " + name + " has taken " + damageTaken + " damage!" );
         }
-        if ( hp < 0 )
+        if ( hp < 0 )//you dead boi
         {
             System.out.println( "   " + name + " has been defeated!" );
             alive = false;
         }
     }
 
-
+    //heals for healValue, cannot exceed maxHp.
     void heal( int healValue )
     {
         hp = hp + healValue;
@@ -81,7 +82,7 @@ public class Hero
         }
     }
 
-
+    //prints stats. what else?
     void printStats()
     {
         System.out.println( name );
@@ -91,8 +92,8 @@ public class Hero
         System.out.println( "Def: " + getDef() );
         System.out.println( "Res: " + getRes() );
     }
+    
     // getters/setters
-
 
     public String getName()
     {

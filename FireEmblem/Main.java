@@ -12,11 +12,25 @@
  */
 package FireEmblem;
 
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+
 public class Main
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello, World!" );
+        System.out.println( "Hello, World! Oh boi" );
+        
         World world = new World();
+        BorderLayout layout = new BorderLayout();
+        JFrame frame = new JFrame();
+        frame.setSize( 6 * 100 + 6, 8 * 100 + 28 );
+        frame.setLayout( layout );
+        frame.add( world.dis, BorderLayout.CENTER );
+
+        frame.setVisible( true );
+        frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        frame.setResizable( false );
     }
 }

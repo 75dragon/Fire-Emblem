@@ -5,9 +5,14 @@ import java.util.ArrayList;
 
 public class World
 {
+    Map map;
+    Displayer dis;
     public World()
     {
-
+        dis = new Displayer();
+        map = new Map(6,8);
+        dis.setMap(map);
+        dis.repaint();
         Hero Merric = new Hero( "Merric", 0, 0, 47, 26, 32, 24, 22, "I", "Excalibur" );
         Merric.printStats();
         Hero Robin = new Hero( "Robin", 0, 0, 40, 29, 29, 29, 22, "I", "Blarraven+" );
