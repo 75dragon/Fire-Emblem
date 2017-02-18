@@ -2,6 +2,7 @@ package FireEmblem;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
@@ -29,19 +30,21 @@ public class Displayer extends JPanel
         height = y * 100;
         size = new Dimension(width, height);
         this.setSize( size );
+        this.setLayout( new GridLayout(8,6) );
+        for (int i = 0; i < y; i++)
+        {
+            for (int ii = 0; ii < x; ii++)
+            {
+                this.add(tile = map.getTile( ii, i ));
+                System.out.println( tile.getX() + ", " + tile.getY() + ": " + tile.getType() );
+            }
+        }
+        this.setVisible( true );
     }
     
     @Override
     public void paintComponent( Graphics g )
     {
         super.paintComponent( g );
-        this.g = g;
-        for (int i = 0; i < x; i++ )
-        {
-            for (int ii = 0; ii < y; ii++)
-            {
-                map.getTile( i, ii ).draw( g );
-            }
-        }
     }
 }

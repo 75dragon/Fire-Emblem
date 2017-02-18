@@ -13,30 +13,35 @@ public class World
         map = new Map(6,8);
         dis.setMap(map);
         dis.repaint();
-        Hero Merric = new Hero( "Merric", 0, 0, 47, 26, 32, 24, 22, "I", "Excalibur" );
+        Hero Merric = new Hero( "Merric", 47, 26, 32, 24, 22, "I", "Excalibur", this );
         Merric.printStats();
-        Hero Robin = new Hero( "Robin", 0, 0, 40, 29, 29, 29, 22, "I", "Blarraven+" );
-        Robin.printStats();
-        Hero TikiY = new Hero( "TikiY", 0, 0, 41, 31, 30, 32, 29, "ID", "Flametoungue+" );
-        TikiY.printStats();
-        Hero Ryoma = new Hero( "Ryoma", 0, 0, 41, 34, 35, 27, 21, "I", "Raijinto" );
-        Ryoma.printStats();
-        Hero Raven = new Hero( "Raven", 0, 0, 41, 31, 38, 25, 22, "I", "Brave Axe+" );
-        Raven.printStats();
-        Hero TestDummy = new Hero( "Testdummy", 0, 0, 100, 5, 5, 5, 5, "I", "Brave Axe+" );
-        TestDummy.printStats();
+        Hero Robin = new Hero( "Robin", 40, 29, 29, 29, 22, "I", "Blarraven+", this );
+        //Robin.printStats();
+        Hero TikiY = new Hero( "TikiY", 41, 31, 30, 32, 29, "ID", "Flametoungue+", this );
+        //TikiY.printStats();
+        Hero Ryoma = new Hero( "Ryoma", 41, 34, 35, 27, 21, "I", "Raijinto", this );
+        //Ryoma.printStats();
+        Hero Raven = new Hero( "Raven", 41, 31, 38, 25, 22, "I", "Brave Axe+", this );
+        //Raven.printStats();
+        Hero TestDummy = new Hero( "Testdummy", 100, 5, 5, 5, 5, "I", "Brave Axe+", this );
+        //TestDummy.printStats();
 
         ArrayList<Hero> Heros = new ArrayList<Hero>();
         Heros.add( Merric );
-        Heros.add( Robin );
-        Heros.add( TikiY );
-        Heros.add( Ryoma );
-        Heros.add( Raven );
-        Heros.add( TestDummy );
+        int Mx = 0;
+        while (!Merric.SetLocation( Mx, 5 ))
+        {
+            Mx++;
+        }
+//        Heros.add( Robin );
+//        Heros.add( TikiY );
+//        Heros.add( Ryoma );
+//        Heros.add( Raven );
+//        Heros.add( TestDummy );
 
-        combat( Heros.get( 0 ), Heros.get( 1 ) );
-        combat( Heros.get( 2 ), Heros.get( 3 ) );
-        combat( Heros.get( 4 ), Heros.get( 5 ) );
+//        combat( Heros.get( 0 ), Heros.get( 1 ) );
+//        combat( Heros.get( 2 ), Heros.get( 3 ) );
+//        combat( Heros.get( 4 ), Heros.get( 5 ) );
 
     }
 

@@ -1,7 +1,7 @@
 package FireEmblem;
 
+import java.awt.event.ActionListener;
 import java.util.Random;
-
 
 public class Map
 {
@@ -18,6 +18,8 @@ public class Map
     int FGY = 0;// first grass tile's y
 
     int grassTotal = 0;
+    
+    Tile hold;
 
 
     public Map( int x, int y )
@@ -33,15 +35,22 @@ public class Map
             {
                 for ( int ii = 0; ii < y; ii++ )
                 {
-                    this.tiles[i][ii] = randomTile( i, ii );
+                    hold = randomTile( i, ii );
+                    this.tiles[i][ii] = hold;
+                    System.out.println( hold.getX() );
+                    ActionListener listener = new MouseListener( hold );
+                    hold.addActionListener( listener );
                 }
             }
             if ( grassTotal == checkMap( this.tiles, FGX, FGY ) )
             {
                 doesntPass = false;
             }
-            grassTotal = 0;
-            System.out.println( "EACH OF THESE MSSG = 1 TRY BOI" );
+            else 
+            {
+                grassTotal = 0;
+                this.tiles = new Tile[x][y];
+            }
         }
     }
 

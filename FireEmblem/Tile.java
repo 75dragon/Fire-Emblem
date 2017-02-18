@@ -1,9 +1,12 @@
 package FireEmblem;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
-public class Tile
+import javax.swing.JButton;
+
+public class Tile extends JButton
 {
     String type;
     Hero occupied;
@@ -32,12 +35,22 @@ public class Tile
         this.y = y;
     }
     
-    public void draw( Graphics g )
+    @Override
+    public void paintComponent( Graphics g )
     {
-        g.setColor(color);
-        g.fillRect( x * 100, y * 100, 100, 100 );
+        super.paintComponent( g );
+        g.setColor(this.color);
+        g.fillRect( 0, 0, 100, 100 );
         g.setColor( Color.BLACK );
-        g.drawString( filled?"True":"False", x * 100, y * 100 + 20);
+        g.setFont( new Font("TimesRoman", Font.PLAIN, 15) );
+        g.drawString( filled?"True":"False", 0, 20);
+        if (occupied != null)
+        {
+            g.setColor( Color.PINK );
+            g.setFont(new Font("TimesRoman", Font.BOLD, 25)); 
+            g.drawString( occupied.getName(), 10, 50 );
+        }
+        System.out.println(this.isVisible() + " " + x + ", " + y + color);
     }
     
     //getter/setter
@@ -66,4 +79,13 @@ public class Tile
         this.filled = filled;
     }
     
+    public int getX()
+    {
+        return x;
+    }
+    
+    public int getY()
+    {
+        return y;
+    }
 }

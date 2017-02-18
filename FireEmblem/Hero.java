@@ -36,12 +36,11 @@ public class Hero
 
     Weapon weapon;
 
-
-    public Hero( String name, int x, int y, int hp, int atk, int spd, int def, int res, String classes, String weapon )
+    World world;
+    
+    public Hero( String name, int hp, int atk, int spd, int def, int res, String classes, String weapon, World world)
     {
         this.name = name;
-        this.x = x;
-        this.y = y;
         this.hp = hp;
         this.maxHp = hp;
         this.atk = atk;
@@ -50,6 +49,19 @@ public class Hero
         this.res = res;
         this.classes = classes;
         this.weapon = new Weapon( weapon, this );
+        this.world = world;
+    }
+    
+    public boolean SetLocation(int x, int y)
+    {
+        if(world.map.getTile( x, y ).getOccupied() == null && world.map.getTile( x, y ).getType().equals( "grass" ))
+        {
+            world.map.getTile( x, y ).setOccupied( this );
+            this.x = x;
+            this.y = y;
+            return true;
+        }
+        return false;
     }
 
     //takes damageTaken damage. 
