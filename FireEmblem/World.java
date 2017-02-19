@@ -7,12 +7,23 @@ public class World
 {
     Map map;
     Displayer dis;
+    //firstClick
+    boolean firstC = true;
+    int FCX;
+    int FCY;
+    Hero FCH;
+    //secondClick
+    boolean secondC = false;
+    int SCX;
+    int SCY;
+    Hero SCH;
+    
     public World()
     {
         dis = new Displayer();
-        map = new Map(6,8);
+        map = new Map(6,8, this);
         dis.setMap(map);
-        dis.repaint();
+        //dis.repaint();
         Hero Merric = new Hero( "Merric", 47, 26, 32, 24, 22, "I", "Excalibur", this );
         Merric.printStats();
         Hero Robin = new Hero( "Robin", 40, 29, 29, 29, 22, "I", "Blarraven+", this );
@@ -43,6 +54,59 @@ public class World
 //        combat( Heros.get( 2 ), Heros.get( 3 ) );
 //        combat( Heros.get( 4 ), Heros.get( 5 ) );
 
+    }
+    
+    public void moveHero(int x, int y, Hero h)
+    {
+        if (firstC == true && h!= null)//select a charector to move!
+        {
+            FCX = x;
+            FCY = y;
+            FCH = h;
+            int spd;
+            if (h.getClasses().contains( "C" ))
+            {
+                spd = 3;
+            }
+            else if (h.getClasses().contains( "I" ) && map.getTile( x, y ).getType().equals( "forest" ))
+            {
+                spd = 3;
+            }
+            else 
+            {
+                spd = 2;
+            }
+            map.makeMoves( x, y, 0, spd, h.getClasses() );
+            firstC = false;
+            secondC = true;
+            return;
+        }
+        else if (firstC == true)//didnt select a char, start all over!
+        {
+            return;
+        }
+        
+        if (secondC == true && h == FCH)//clicked your own char, so stay put!
+        {
+            FCH.setHasTurn( false );
+            secondC = false;
+            firstC = true;
+            map.clearMoves();
+        }
+        else if (secondC == true && map.getTile( x, y ).isReachable())//move 2 spots with no one there, done moving
+        {
+            FCH.moveLocation( x, y );
+            FCH.setHasTurn( false );
+            secondC = false;
+            firstC = true;
+            map.clearMoves();
+        }
+        else //out of bounds, retry!
+        {
+            secondC = false;
+            firstC = true;
+            map.clearMoves();
+        }
     }
 
 
@@ -127,5 +191,10 @@ public class World
                 (int)Math.ceil( b.getAtk() * bMod - ( b.getWeapon().isPhysical() ? a.getDef() : a.getRes() ) ) );
         }
 
+    }
+    
+    public int distance(int x, int y)
+    {
+        return Math.abs( x - y );
     }
 }

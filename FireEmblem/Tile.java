@@ -14,9 +14,14 @@ public class Tile extends JButton
     int y;
     Color color;
     boolean filled = false;
+    boolean reachable = false;
+    World world;
     
-    public Tile(String type, int x, int y)
+    public Tile(String type, int x, int y, World world)
     {
+        //setOpaque(false);
+        //setContentAreaFilled(false);
+        //setBorderPainted(false);
         this.type = type;
         System.out.println("Making a " + type + " tile at " + x + " , " + y);
         if (type.equals( "grass" ))
@@ -44,6 +49,7 @@ public class Tile extends JButton
         g.setColor( Color.BLACK );
         g.setFont( new Font("TimesRoman", Font.PLAIN, 15) );
         g.drawString( filled?"True":"False", 0, 20);
+        g.drawString( reachable?"True":"false", 0, 40 );
         if (occupied != null)
         {
             g.setColor( Color.PINK );
@@ -51,6 +57,7 @@ public class Tile extends JButton
             g.drawString( occupied.getName(), 10, 50 );
         }
         System.out.println(this.isVisible() + " " + x + ", " + y + color);
+        repaint();
     }
     
     //getter/setter
@@ -88,4 +95,15 @@ public class Tile extends JButton
     {
         return y;
     }
+
+    public boolean isReachable()
+    {
+        return reachable;
+    }
+
+    public void setReachable( boolean reachable )
+    {
+        this.reachable = reachable;
+    }
+    
 }

@@ -1,5 +1,6 @@
 package FireEmblem;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -21,7 +22,7 @@ public class Displayer extends JPanel
         System.out.println( "making displayer" );
     }
     
-    public void setMap( Map map)  
+    public void setMap( Map map )  
     {
         this.map = map;
         x = map.getX();
@@ -36,7 +37,7 @@ public class Displayer extends JPanel
             for (int ii = 0; ii < x; ii++)
             {
                 this.add(tile = map.getTile( ii, i ));
-                System.out.println( tile.getX() + ", " + tile.getY() + ": " + tile.getType() );
+                System.out.println( tile.getX() + ", " + tile.getY() + ": " + tile.getType() + this.getComponentCount() );
             }
         }
         this.setVisible( true );

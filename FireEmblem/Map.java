@@ -20,11 +20,13 @@ public class Map
     int grassTotal = 0;
     
     Tile hold;
+    
+    World world;
 
-
-    public Map( int x, int y )
+    public Map( int x, int y , World world)
     {
         System.out.println( "Making map of " + x + " by " + y );
+        this.world = world;
         this.x = x;
         this.y = y;
         this.tiles = new Tile[x][y];
@@ -35,10 +37,10 @@ public class Map
             {
                 for ( int ii = 0; ii < y; ii++ )
                 {
-                    hold = randomTile( i, ii );
+                    hold = randomTile( i, ii , world );
                     this.tiles[i][ii] = hold;
                     System.out.println( hold.getX() );
-                    ActionListener listener = new MouseListener( hold );
+                    ActionListener listener = new MouseListener( hold, world );
                     hold.addActionListener( listener );
                 }
             }
@@ -55,13 +57,13 @@ public class Map
     }
 
 
-    public Tile randomTile( int x, int y )
+    public Tile randomTile( int x, int y, World world )
     {
         Tile hold = null;
         int r = rand.nextInt( 10 ) + 1;
         if ( r <= 7 )
         {
-            hold = new Tile( "grass", x, y );
+            hold = new Tile( "grass", x, y, world );
             if ( grassTotal == 0 )
             {
                 FGX = x;
@@ -71,11 +73,11 @@ public class Map
         }
         else if ( r <= 9 )
         {
-            hold = new Tile( "forest", x, y );
+            hold = new Tile( "forest", x, y, world );
         }
         else
         {
-            hold = new Tile( "mountain", x, y );
+            hold = new Tile( "mountain", x, y, world );
         }
         return hold;
     }
@@ -103,7 +105,66 @@ public class Map
             return 0;
         }
     }
-
+    
+    public void makeMoves( int x , int y, int spaces, int spd,  String type)
+    {
+        if (spaces > spd)
+        {
+            return;
+        }
+        if ( x < 0 || x >= this.x || y < 0 || y >= this.y )
+        {
+            return;
+        }
+        if (tiles[x][y].getType().equals( "forest" ) && type.contains( "C" ))
+        {
+            return;
+        }
+        if (tiles[x][y].getType().equals( "mountain" ) && (type.contains( "C" ) || type.contains( "I" )))
+        {
+            return;
+        }
+        if (type.contains( "F" ))
+        {
+            spaces++;
+            makeMoves(x + 1, y, spaces, spd, type );
+            makeMoves(x - 1, y, spaces, spd, type );
+            makeMoves(x, y + 1, spaces, spd, type );
+            makeMoves(x, y - 1, spaces, spd, type );
+        }
+        else if (type.contains( "I" ))
+        {
+            if (tiles[x][y].getType().equals( "forest" ))
+            {
+                spaces++;
+            }
+            spaces++;
+            makeMoves(x + 1, y, spaces, spd, type );
+            makeMoves(x - 1, y, spaces, spd, type );
+            makeMoves(x, y + 1, spaces, spd, type );
+            makeMoves(x, y - 1, spaces, spd, type );
+        }
+        else
+        {
+            spaces++;
+            makeMoves(x + 1, y, spaces, spd, type );
+            makeMoves(x - 1, y, spaces, spd, type );
+            makeMoves(x, y + 1, spaces, spd, type );
+            makeMoves(x, y - 1, spaces, spd, type );
+        }
+        this.tiles[x][y].setReachable( true );
+    }
+    
+    public void clearMoves()
+    {
+        for ( int i = 0; i < x; i++ )
+        {
+            for ( int ii = 0; ii < y; ii++ )
+            {
+                this.tiles[i][ii].setReachable(false);
+            }
+        }
+    }
 
     public Tile[][] getTiles()
     {

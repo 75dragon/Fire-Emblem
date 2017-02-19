@@ -38,6 +38,10 @@ public class Hero
 
     World world;
     
+    boolean hasTurn = true;
+    
+    boolean hasAtk = true;
+    
     public Hero( String name, int hp, int atk, int spd, int def, int res, String classes, String weapon, World world)
     {
         this.name = name;
@@ -56,6 +60,19 @@ public class Hero
     {
         if(world.map.getTile( x, y ).getOccupied() == null && world.map.getTile( x, y ).getType().equals( "grass" ))
         {
+            world.map.getTile( x, y ).setOccupied( this );
+            this.x = x;
+            this.y = y;
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean moveLocation(int x, int y)
+    {
+        if (world.map.getTile( x, y ).getOccupied() == null)
+        {
+            world.map.getTile( this.x, this.y ).setOccupied( null );
             world.map.getTile( x, y ).setOccupied( this );
             this.x = x;
             this.y = y;
@@ -250,4 +267,25 @@ public class Hero
         return weapon;
     }
 
+    public boolean isHasTurn()
+    {
+        return hasTurn;
+    }
+
+    public void setHasTurn( boolean hasTurn )
+    {
+        this.hasTurn = hasTurn;
+    }
+
+    public boolean isHasAtk()
+    {
+        return hasAtk;
+    }
+
+    public void setHasAtk( boolean hasAtk )
+    {
+        this.hasAtk = hasAtk;
+    }
+    
+    
 }
