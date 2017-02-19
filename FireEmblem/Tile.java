@@ -52,11 +52,13 @@ public class Tile extends JButton
         g.drawString( reachable?"True":"false", 0, 40 );
         if (occupied != null)
         {
-            g.setColor( Color.PINK );
+            g.setColor( Color.RED );
             g.setFont(new Font("TimesRoman", Font.BOLD, 25)); 
             g.drawString( occupied.getName(), 10, 50 );
+            g.setFont(new Font("TimesRoman", Font.BOLD, 15)); 
+            g.drawString( "HP: " + occupied.getHp() + "/" + occupied.getMaxHp(), 10, 75 );
         }
-        System.out.println(this.isVisible() + " " + x + ", " + y + color);
+        //System.out.println(this.isVisible() + " " + x + ", " + y + color);
         repaint();
     }
     

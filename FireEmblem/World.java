@@ -17,6 +17,7 @@ public class World
     int SCX;
     int SCY;
     Hero SCH;
+    boolean thirdC = false;
     
     public World()
     {
@@ -34,20 +35,40 @@ public class World
         //Ryoma.printStats();
         Hero Raven = new Hero( "Raven", 41, 31, 38, 25, 22, "I", "Brave Axe+", this );
         //Raven.printStats();
-        Hero TestDummy = new Hero( "Testdummy", 100, 5, 5, 5, 5, "I", "Brave Axe+", this );
+        //Hero TestDummy = new Hero( "Testdummy", 100, 5, 5, 5, 5, "I", "Brave Axe+", this );
         //TestDummy.printStats();
 
         ArrayList<Hero> Heros = new ArrayList<Hero>();
         Heros.add( Merric );
         int Mx = 0;
-        while (!Merric.SetLocation( Mx, 5 ))
+        while (!Merric.SetLocation( Mx, 0 ))
         {
             Mx++;
         }
-//        Heros.add( Robin );
-//        Heros.add( TikiY );
-//        Heros.add( Ryoma );
-//        Heros.add( Raven );
+        Heros.add( Robin );
+        int Rx = 0;
+        while (!Robin.SetLocation( Rx, 1 ))
+        {
+            Rx++;
+        }
+        Heros.add( TikiY );
+        int Tx = 0;
+        while (!TikiY.SetLocation( Tx, 2 ))
+        {
+            Tx++;
+        }
+        Heros.add( Ryoma );
+        int RRx = 0;
+        while (!Ryoma.SetLocation( RRx, 3))
+        {
+            RRx++;
+        }
+        Heros.add( Raven );
+        int Rax = 0;
+        while (!Raven.SetLocation( Rax, 4 ))
+        {
+            Rax++;
+        }
 //        Heros.add( TestDummy );
 
 //        combat( Heros.get( 0 ), Heros.get( 1 ) );
@@ -79,6 +100,7 @@ public class World
             map.makeMoves( x, y, 0, spd, h.getClasses() );
             firstC = false;
             secondC = true;
+            System.out.println( "passed step 1" );
             return;
         }
         else if (firstC == true)//didnt select a char, start all over!
@@ -86,20 +108,51 @@ public class World
             return;
         }
         
+        
+        if (thirdC == true)
+        {
+            System.out.println( "in third step!!!" );
+            if (h == null)
+            {
+                firstC = true;
+                thirdC = false;
+                return;
+            }
+            else if (FCH.getWeapon().getRange() == distance(FCH.getX() , h.getX()) + distance(FCH.getY(), h.getY()))
+            {
+                combat(FCH, h);
+                firstC = true;
+                thirdC = false;
+                return;
+            }
+            else
+            {
+                firstC = true;
+                thirdC = false;
+                return;
+            }
+        }
+        
+        
+        
         if (secondC == true && h == FCH)//clicked your own char, so stay put!
         {
             FCH.setHasTurn( false );
             secondC = false;
-            firstC = true;
+            thirdC = true;
+            firstC = false;
             map.clearMoves();
+            System.out.println( "passed step 2" );
         }
         else if (secondC == true && map.getTile( x, y ).isReachable())//move 2 spots with no one there, done moving
         {
             FCH.moveLocation( x, y );
             FCH.setHasTurn( false );
             secondC = false;
-            firstC = true;
+            thirdC = true;
+            firstC = false;
             map.clearMoves();
+            System.out.println( "passed step 2" );
         }
         else //out of bounds, retry!
         {
