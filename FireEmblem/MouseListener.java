@@ -17,7 +17,7 @@ public class MouseListener implements ActionListener
     public void actionPerformed( ActionEvent e )
     {
         System.out.println( "Tile clicked at" + tile.getX() + ", " + tile.getY() );
-        world.moveHero( tile.getX(), tile.getY(), tile.getOccupied() );
+        world.moveHero( tile.getxloc(), tile.getyloc(), tile.getOccupied() );
     }
 
 }

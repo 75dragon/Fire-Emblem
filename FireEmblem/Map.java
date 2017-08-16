@@ -42,6 +42,7 @@ public class Map
                     System.out.println( hold.getX() );
                     ActionListener listener = new MouseListener( hold, world );
                     hold.addActionListener( listener );
+                    hold.repaint();
                 }
             }
             if ( grassTotal == checkMap( this.tiles, FGX, FGY ) )
@@ -175,17 +176,5 @@ public class Map
     public Tile getTile( int x, int y )
     {
         return tiles[x][y];
-    }
-
-
-    public int getX()
-    {
-        return x;
-    }
-
-
-    public int getY()
-    {
-        return y;
     }
 }

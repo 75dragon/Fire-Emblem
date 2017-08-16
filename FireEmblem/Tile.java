@@ -10,8 +10,8 @@ public class Tile extends JButton
 {
     String type;
     Hero occupied;
-    int x;
-    int y;
+    int xloc;
+    int yloc;
     Color color;
     boolean filled = false;
     boolean reachable = false;
@@ -36,8 +36,8 @@ public class Tile extends JButton
         {
             color = Color.GRAY;
         }
-        this.x = x;
-        this.y = y;
+        xloc = x;
+        yloc = y;
     }
     
     @Override
@@ -48,8 +48,8 @@ public class Tile extends JButton
         g.fillRect( 0, 0, 100, 100 );
         g.setColor( Color.BLACK );
         g.setFont( new Font("TimesRoman", Font.PLAIN, 15) );
-        g.drawString( filled?"True":"False", 0, 20);
-        g.drawString( reachable?"True":"false", 0, 40 );
+        g.drawString( filled?"True" + xloc:"False" + xloc, 0, 20);
+        g.drawString( reachable?"True" + yloc:"false" + yloc, 0, 40 );
         if (occupied != null)
         {
             g.setColor( Color.RED );
@@ -59,7 +59,6 @@ public class Tile extends JButton
             g.drawString( "HP: " + occupied.getHp() + "/" + occupied.getMaxHp(), 10, 75 );
         }
         //System.out.println(this.isVisible() + " " + x + ", " + y + color);
-        repaint();
     }
     
     //getter/setter
@@ -87,16 +86,6 @@ public class Tile extends JButton
     {
         this.filled = filled;
     }
-    
-    public int getX()
-    {
-        return x;
-    }
-    
-    public int getY()
-    {
-        return y;
-    }
 
     public boolean isReachable()
     {
@@ -108,4 +97,13 @@ public class Tile extends JButton
         this.reachable = reachable;
     }
     
+    public int getxloc()
+    {
+        return xloc;
+    }
+    
+    public int getyloc()
+    {
+        return yloc;
+    }
 }

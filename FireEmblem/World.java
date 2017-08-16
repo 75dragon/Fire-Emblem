@@ -19,10 +19,10 @@ public class World
     Hero SCH;
     boolean thirdC = false;
     
-    public World()
+    public World(int x, int y)
     {
         dis = new Displayer();
-        map = new Map(6,8, this);
+        map = new Map(x,y, this);
         dis.setMap(map);
         //dis.repaint();
         Hero Merric = new Hero( "Merric", 47, 26, 32, 24, 22, "I", "Excalibur", this );

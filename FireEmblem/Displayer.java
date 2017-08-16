@@ -25,13 +25,13 @@ public class Displayer extends JPanel
     public void setMap( Map map )  
     {
         this.map = map;
-        x = map.getX();
+        x = map.x;
         width = x * 100;
-        y = map.getY();
+        y = map.y;
         height = y * 100;
         size = new Dimension(width, height);
         this.setSize( size );
-        this.setLayout( new GridLayout(8,6) );
+        this.setLayout( new GridLayout(x,x) );
         for (int i = 0; i < y; i++)
         {
             for (int ii = 0; ii < x; ii++)
