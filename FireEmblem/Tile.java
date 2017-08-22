@@ -102,18 +102,26 @@ public class Tile extends JButton
         this.occupied = occupied;
     }
 
+    /**
+     * used for the floodfill to make sure all tiles are accessible
+     * @return boolean, if reachable or not
+     */
     public boolean isFilled()
     {
         return filled;
     }
 
+    /**
+     * used for the floodfill to mark that the tile is reachable
+     * @param filled true, to mark that we can get there
+     */
     public void setFilled( boolean filled )
     {
         this.filled = filled;
     }
 
     /**
-     * used for the floodfill to make sure all tiles are accessible
+     * if the player can access the tile this turn
      * @return boolean, if reachable or not
      */
     public boolean isReachable()
@@ -122,7 +130,7 @@ public class Tile extends JButton
     }
 
     /**
-     * used for the floodfill to mark that the tile is reachable
+     * set if the tile is accessable by a char
      * @param reachable true, to mark that we can get there
      */
     public void setReachable( boolean reachable )
