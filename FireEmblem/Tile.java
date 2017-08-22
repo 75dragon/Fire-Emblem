@@ -12,6 +12,9 @@ public class Tile extends JButton
     Hero occupied;
     int xloc;
     int yloc;
+    int rd;
+    int grn;
+    int bl;
     Color color;
     boolean filled = false;
     boolean reachable = false;
@@ -26,16 +29,23 @@ public class Tile extends JButton
         System.out.println("Making a " + type + " tile at " + x + " , " + y);
         if (type.equals( "grass" ))
         {
-            color = new Color(204, 255, 51);
+            rd = 204;
+            grn = 255;
+            bl = 51;
         }
         if (type.equals( "forest" ))
         {
-            color = new Color(0, 153, 0);
+            rd = 0;
+            grn = 153;
+            bl = 0;
         }
         if (type.equals( "mountain" ))
         {
-            color = Color.GRAY;
+            rd = 125;
+            grn = 125;
+            bl = 125;
         }
+        color = new Color(rd, grn, bl);
         xloc = x;
         yloc = y;
     }
@@ -105,5 +115,10 @@ public class Tile extends JButton
     public int getyloc()
     {
         return yloc;
+    }
+    
+    public void tintBlue()
+    {
+        
     }
 }

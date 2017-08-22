@@ -20,8 +20,8 @@ public class Main
 {
     public static void main( String[] args )
     {
-        int x = 10; // width of map
-        int y = 10; // height of map
+        int x = 7; // width of map
+        int y = 7; // height of map
         World world = new World(x, y);
         BorderLayout layout = new BorderLayout();
         JFrame frame = new JFrame();
