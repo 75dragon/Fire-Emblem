@@ -1,14 +1,12 @@
 /**
- * TODO Write a one-sentence summary of your class here. TODO Follow it with
- * additional details about its purpose, what abstraction it represents, and how
- * to use it.
+ * My attempt to copy the fire emblem heros game
  *
- * @author austi
+ * @author Austin Cheng
  * @version Feb 17, 2017
- * @author Period: TODO
+ * @author Period: -1
  * @author Assignment: FireEmblem
  *
- * @author Sources: TODO
+ * @author Sources: Fire Emblem Heros
  */
 package FireEmblem;
 

@@ -77,6 +77,19 @@ public class World
 
     }
     
+    /**
+     * Mhm this is super ugly. Ill try to explain.
+     * First, everytime you click it calls this function
+     * that whats firstC means, first click! (on a hero to activate the chain)
+     * then, you move (either to your own square to not move or in range)
+     * thats SecondC
+     * then, if in range, your ThirdC can attack
+     * It a chain - if you break it, start over.
+     * TODO - Make this 3 seperate functions
+     * @param x
+     * @param y
+     * @param h
+     */
     public void moveHero(int x, int y, Hero h)
     {
         if (firstC == true && h!= null)//select a charector to move!

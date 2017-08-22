@@ -73,7 +73,6 @@ public class Tile extends JButton
             g.setFont(new Font("TimesRoman", Font.BOLD, 15)); 
             g.drawString( "HP: " + occupied.getHp() + "/" + occupied.getMaxHp(), 10, 75 );
         }
-        //System.out.println(this.isVisible() + " " + x + ", " + y + color);
     }
     
     /**
