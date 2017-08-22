@@ -19,6 +19,7 @@ public class Tile extends JButton
     boolean filled = false;
     boolean reachable = false;
     World world;
+    boolean tinted = false;
     
     public Tile(String type, int x, int y, World world)
     {
@@ -35,9 +36,9 @@ public class Tile extends JButton
         }
         if (type.equals( "forest" ))
         {
-            rd = 0;
+            rd = 50;
             grn = 153;
-            bl = 0;
+            bl = 50;
         }
         if (type.equals( "mountain" ))
         {
@@ -118,20 +119,26 @@ public class Tile extends JButton
     }
     
     /**
-     * tints the color of the tile blue (+50)
+     * tints the color of the tile blue
      */
     public void tintBlue()
     {
-        bl = bl + 50;
+        rd = rd - 50;
+        bl = bl + 100;
+        grn = grn - 50;
         color = new Color(rd, grn, bl);
+        tinted = true;
     }
     
     /**
-     * untints the color of the tile blue (-50)
+     * untints the color of the tile blue
      */
     public void untintBlue()
     {
-        bl = bl - 50;
+        rd = rd + 50;
+        bl = bl - 100;
+        grn = grn + 50;
         color = new Color(rd, grn, bl);
+        tinted = false;
     }
 }
