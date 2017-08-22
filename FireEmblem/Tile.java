@@ -117,8 +117,21 @@ public class Tile extends JButton
         return yloc;
     }
     
+    /**
+     * tints the color of the tile blue (+50)
+     */
     public void tintBlue()
     {
-        
+        bl = bl + 50;
+        color = new Color(rd, grn, bl);
+    }
+    
+    /**
+     * untints the color of the tile blue (-50)
+     */
+    public void untintBlue()
+    {
+        bl = bl - 50;
+        color = new Color(rd, grn, bl);
     }
 }
