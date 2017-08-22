@@ -85,7 +85,7 @@ public class World
      * thats SecondC
      * then, if in range, your ThirdC can attack
      * It a chain - if you break it, start over.
-     * TODO - Make this 3 seperate functions
+     * TODO - Make this 3 separate functions
      * @param x
      * @param y
      * @param h
@@ -114,10 +114,12 @@ public class World
             firstC = false;
             secondC = true;
             System.out.println( "passed step 1" );
+            map.refreshTiles();
             return;
         }
         else if (firstC == true)//didnt select a char, start all over!
         {
+            map.refreshTiles();
             return;
         }
         
@@ -129,6 +131,7 @@ public class World
             {
                 firstC = true;
                 thirdC = false;
+                map.refreshTiles();
                 return;
             }
             else if (FCH.getWeapon().getRange() == distance(FCH.getX() , h.getX()) + distance(FCH.getY(), h.getY()))
@@ -136,12 +139,14 @@ public class World
                 combat(FCH, h);
                 firstC = true;
                 thirdC = false;
+                map.refreshTiles();
                 return;
             }
             else
             {
                 firstC = true;
                 thirdC = false;
+                map.refreshTiles();
                 return;
             }
         }
@@ -173,6 +178,7 @@ public class World
             firstC = true;
             map.clearMoves();
         }
+        map.refreshTiles();
     }
 
 

@@ -179,7 +179,17 @@ public class Map
         }
     }
 
-
+    public void refreshTiles()
+    {
+        for ( int i = 0; i < x; i++ )
+        {
+            for ( int ii = 0; ii < y; ii++ )
+            {
+                this.tiles[i][ii].repaint();
+            }
+        }
+    }
+    
     public Tile[][] getTiles()
     {
         return tiles;
