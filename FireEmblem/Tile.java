@@ -21,11 +21,15 @@ public class Tile extends JButton
     World world;
     boolean tinted = false;
     
+    /**
+     * Makes a tile for the world
+     * @param type forest, mountain, grass
+     * @param x x location
+     * @param y y location
+     * @param world the world its in
+     */
     public Tile(String type, int x, int y, World world)
     {
-        //setOpaque(false);
-        //setContentAreaFilled(false);
-        //setBorderPainted(false);
         this.type = type;
         System.out.println("Making a " + type + " tile at " + x + " , " + y);
         if (type.equals( "grass" ))
@@ -72,17 +76,28 @@ public class Tile extends JButton
         //System.out.println(this.isVisible() + " " + x + ", " + y + color);
     }
     
-    //getter/setter
+    /**
+     * returns the tile type: grass, forest, mountain 
+     * @return a string
+     */
     public String getType()
     {
         return type;
     }
     
+    /**
+     * returns a hero if it occupies this square, else null
+     * @return hero/null
+     */
     public Hero getOccupied()
     {
         return occupied;
     }
 
+    /**
+     * sets a hero to this square
+     * @param occupied a hero
+     */
     public void setOccupied( Hero occupied )
     {
         this.occupied = occupied;
@@ -98,21 +113,37 @@ public class Tile extends JButton
         this.filled = filled;
     }
 
+    /**
+     * used for the floodfill to make sure all tiles are accessible
+     * @return boolean, if reachable or not
+     */
     public boolean isReachable()
     {
         return reachable;
     }
 
+    /**
+     * used for the floodfill to mark that the tile is reachable
+     * @param reachable true, to mark that we can get there
+     */
     public void setReachable( boolean reachable )
     {
         this.reachable = reachable;
     }
     
+    /**
+     * gets the X cord
+     * @return int X
+     */
     public int getxloc()
     {
         return xloc;
     }
     
+    /**
+     * returns the Y cord
+     * @return int Y
+     */
     public int getyloc()
     {
         return yloc;
