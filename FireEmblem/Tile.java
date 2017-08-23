@@ -19,7 +19,8 @@ public class Tile extends JButton
     boolean filled = false;
     boolean reachable = false;
     World world;
-    boolean tinted = false;
+    boolean tintedBlue = false;
+    boolean tintedRed = false;
     
     /**
      * Makes a tile for the world
@@ -63,8 +64,8 @@ public class Tile extends JButton
         g.fillRect( 0, 0, 100, 100 );
         g.setColor( Color.BLACK );
         g.setFont( new Font("TimesRoman", Font.PLAIN, 15) );
-        g.drawString( filled?"True" + xloc:"False" + xloc, 0, 20);
-        g.drawString( reachable?"True" + yloc:"false" + yloc, 0, 40 );
+        //g.drawString( filled?"True" + xloc:"False" + xloc, 0, 20);
+        //g.drawString( reachable?"True" + yloc:"false" + yloc, 0, 40 );
         if (occupied != null)
         {
             g.setColor( Color.RED );
@@ -165,7 +166,7 @@ public class Tile extends JButton
         bl = bl + 100;
         grn = grn - 50;
         color = new Color(rd, grn, bl);
-        tinted = true;
+        tintedBlue = true;
     }
     
     /**
@@ -177,6 +178,29 @@ public class Tile extends JButton
         bl = bl - 100;
         grn = grn + 50;
         color = new Color(rd, grn, bl);
-        tinted = false;
+        tintedBlue = false;
+    }
+    
+    /**
+     * tints the color of the tile red
+     */
+    public void tintRed()
+    {
+        System.out.println( "tinting" );
+        bl = bl - 50;
+        grn = grn - 50;
+        color = new Color(rd, grn, bl);
+        tintedRed = true;
+    }
+    
+    /**
+     * untints the color of the tile red
+     */
+    public void untintRed()
+    {
+        bl = bl + 50;
+        grn = grn + 50;
+        color = new Color(rd, grn, bl);
+        tintedRed = false;
     }
 }

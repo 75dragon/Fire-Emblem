@@ -157,7 +157,7 @@ public class Map
             makeMoves( x, y - 1, spaces, spd, type );
         }
         this.tiles[x][y].setReachable( true );
-        if ( this.tiles[x][y].tinted == false )
+        if ( this.tiles[x][y].tintedBlue == false )
         {
             this.tiles[x][y].tintBlue();
         }
@@ -171,9 +171,27 @@ public class Map
             for ( int ii = 0; ii < y; ii++ )
             {
                 this.tiles[i][ii].setReachable( false );
-                if ( this.tiles[i][ii].tinted == true )
+                if ( this.tiles[i][ii].tintedBlue == true )
                 {
                     this.tiles[i][ii].untintBlue();
+                }
+                if ( this.tiles[i][ii].tintedRed == true )
+                {
+                    this.tiles[i][ii].untintRed();
+                }
+            }
+        }
+    }
+    
+    public void attackTint(int xloc, int yloc, int range)
+    {
+        for ( int i = 0; i < x; i++ )
+        {
+            for ( int ii = 0; ii < y; ii++ )
+            {
+                if (World.distance( xloc, i ) + World.distance( ii, yloc ) <= range)
+                {
+                    this.tiles[i][ii].tintRed();
                 }
             }
         }

@@ -6,107 +6,119 @@ import java.util.ArrayList;
 public class World
 {
     Map map;
+
     Displayer dis;
-    //firstClick
+
+    // firstClick
     boolean firstC = true;
+
     int FCX;
+
     int FCY;
+
     Hero FCH;
-    //secondClick
+
+    // secondClick
     boolean secondC = false;
+
     int SCX;
+
     int SCY;
+
     Hero SCH;
+
     boolean thirdC = false;
-    
-    public World(int x, int y)
+
+
+    public World( int x, int y )
     {
         dis = new Displayer();
-        map = new Map(x,y, this);
-        dis.setMap(map);
-        //dis.repaint();
+        map = new Map( x, y, this );
+        dis.setMap( map );
+        // dis.repaint();
         Hero Merric = new Hero( "Merric", 47, 26, 32, 24, 22, "I", "Excalibur", this );
         Merric.printStats();
         Hero Robin = new Hero( "Robin", 40, 29, 29, 29, 22, "I", "Blarraven+", this );
-        //Robin.printStats();
+        // Robin.printStats();
         Hero TikiY = new Hero( "TikiY", 41, 31, 30, 32, 29, "ID", "Flametoungue+", this );
-        //TikiY.printStats();
+        // TikiY.printStats();
         Hero Ryoma = new Hero( "Ryoma", 41, 34, 35, 27, 21, "I", "Raijinto", this );
-        //Ryoma.printStats();
+        // Ryoma.printStats();
         Hero Raven = new Hero( "Raven", 41, 31, 38, 25, 22, "I", "Brave Axe+", this );
-        //Raven.printStats();
-        //Hero TestDummy = new Hero( "Testdummy", 100, 5, 5, 5, 5, "I", "Brave Axe+", this );
-        //TestDummy.printStats();
+        // Raven.printStats();
+        // Hero TestDummy = new Hero( "Testdummy", 100, 5, 5, 5, 5, "I", "Brave
+        // Axe+", this );
+        // TestDummy.printStats();
 
         ArrayList<Hero> Heros = new ArrayList<Hero>();
         Heros.add( Merric );
         int Mx = 0;
-        while (!Merric.SetLocation( Mx, 0 ))
+        while ( !Merric.SetLocation( Mx, 0 ) )
         {
             Mx++;
         }
         Heros.add( Robin );
         int Rx = 0;
-        while (!Robin.SetLocation( Rx, 1 ))
+        while ( !Robin.SetLocation( Rx, 1 ) )
         {
             Rx++;
         }
         Heros.add( TikiY );
         int Tx = 0;
-        while (!TikiY.SetLocation( Tx, 2 ))
+        while ( !TikiY.SetLocation( Tx, 2 ) )
         {
             Tx++;
         }
         Heros.add( Ryoma );
         int RRx = 0;
-        while (!Ryoma.SetLocation( RRx, 3))
+        while ( !Ryoma.SetLocation( RRx, 3 ) )
         {
             RRx++;
         }
         Heros.add( Raven );
         int Rax = 0;
-        while (!Raven.SetLocation( Rax, 4 ))
+        while ( !Raven.SetLocation( Rax, 4 ) )
         {
             Rax++;
         }
-//        Heros.add( TestDummy );
+        // Heros.add( TestDummy );
 
-//        combat( Heros.get( 0 ), Heros.get( 1 ) );
-//        combat( Heros.get( 2 ), Heros.get( 3 ) );
-//        combat( Heros.get( 4 ), Heros.get( 5 ) );
+        // combat( Heros.get( 0 ), Heros.get( 1 ) );
+        // combat( Heros.get( 2 ), Heros.get( 3 ) );
+        // combat( Heros.get( 4 ), Heros.get( 5 ) );
 
     }
-    
+
+
     /**
-     * Mhm this is super ugly. Ill try to explain.
-     * First, everytime you click it calls this function
-     * that whats firstC means, first click! (on a hero to activate the chain)
-     * then, you move (either to your own square to not move or in range)
-     * thats SecondC
-     * then, if in range, your ThirdC can attack
-     * It a chain - if you break it, start over.
-     * TODO - Make this 3 separate functions
+     * Mhm this is super ugly. Ill try to explain. First, everytime you click it
+     * calls this function that whats firstC means, first click! (on a hero to
+     * activate the chain) then, you move (either to your own square to not move
+     * or in range) thats SecondC then, if in range, your ThirdC can attack It a
+     * chain - if you break it, start over. TODO - Make this 3 separate
+     * functions
+     * 
      * @param x
      * @param y
      * @param h
      */
-    public void moveHero(int x, int y, Hero h)
+    public void moveHero( int x, int y, Hero h )
     {
-        if (firstC == true && h!= null)//select a charector to move!
+        if ( firstC == true && h != null )// select a charector to move!
         {
             FCX = x;
             FCY = y;
             FCH = h;
             int spd;
-            if (h.getClasses().contains( "C" ))
+            if ( h.getClasses().contains( "C" ) )
             {
                 spd = 3;
             }
-            else if (h.getClasses().contains( "I" ) && map.getTile( x, y ).getType().equals( "forest" ))
+            else if ( h.getClasses().contains( "I" ) && map.getTile( x, y ).getType().equals( "forest" ) )
             {
                 spd = 3;
             }
-            else 
+            else
             {
                 spd = 2;
             }
@@ -117,28 +129,30 @@ public class World
             map.refreshTiles();
             return;
         }
-        else if (firstC == true)//didnt select a char, start all over!
+        else if ( firstC == true )// didnt select a char, start all over!
         {
             map.refreshTiles();
             return;
         }
-        
-        
-        if (thirdC == true)
+
+        if ( thirdC == true )
         {
             System.out.println( "in third step!!!" );
-            if (h == null)
+            if ( h == null )
             {
                 firstC = true;
                 thirdC = false;
+                map.clearMoves();
                 map.refreshTiles();
                 return;
             }
-            else if (FCH.getWeapon().getRange() == distance(FCH.getX() , h.getX()) + distance(FCH.getY(), h.getY()))
+            else if ( FCH.getWeapon().getRange() == distance( FCH.getX(), h.getX() )
+                + distance( FCH.getY(), h.getY() ) )
             {
-                combat(FCH, h);
+                combat( FCH, h );
                 firstC = true;
                 thirdC = false;
+                map.clearMoves();
                 map.refreshTiles();
                 return;
             }
@@ -146,14 +160,13 @@ public class World
             {
                 firstC = true;
                 thirdC = false;
+                map.clearMoves();
                 map.refreshTiles();
                 return;
             }
         }
-        
-        
-        
-        if (secondC == true && h == FCH)//clicked your own char, so stay put!
+
+        if ( secondC == true && h == FCH )// clicked your own char, so stay put!
         {
             FCH.setHasTurn( false );
             secondC = false;
@@ -161,8 +174,8 @@ public class World
             firstC = false;
             map.clearMoves();
             System.out.println( "passed step 2" );
-        }
-        else if (secondC == true && map.getTile( x, y ).isReachable())//move 2 spots with no one there, done moving
+        } // move 2 spots with no one there, done moving
+        else if ( secondC == true && map.getTile( x, y ).isReachable() )
         {
             FCH.moveLocation( x, y );
             FCH.setHasTurn( false );
@@ -172,13 +185,17 @@ public class World
             map.clearMoves();
             System.out.println( "passed step 2" );
         }
-        else //out of bounds, retry!
+        else // out of bounds, retry!
         {
             secondC = false;
             firstC = true;
             map.clearMoves();
         }
         map.refreshTiles();
+        if ( thirdC == true )
+        {
+            map.attackTint( FCH.getX(), FCH.getY(), FCH.getWeapon().getRange() );
+        }
     }
 
 
@@ -264,8 +281,9 @@ public class World
         }
 
     }
-    
-    public int distance(int x, int y)
+
+
+    public static int distance( int x, int y )
     {
         return Math.abs( x - y );
     }
