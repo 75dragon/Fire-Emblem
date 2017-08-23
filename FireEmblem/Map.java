@@ -24,7 +24,12 @@ public class Map
 
     World world;
 
-
+    /**
+     * Generates a map of tiles to host our playing field
+     * @param x dimension of the world
+     * @param y dimension of the world
+     * @param world that hosts everything
+     */
     public Map( int x, int y, World world )
     {
         System.out.println( "Making map of " + x + " by " + y );
@@ -59,7 +64,13 @@ public class Map
         }
     }
 
-
+    /**
+     * to generate random tiles for a random map
+     * @param x location of the tile
+     * @param y location of the tile
+     * @param world the world the tiles are in
+     * @return a tile to place in the world
+     */
     public Tile randomTile( int x, int y, World world )
     {
         Tile hold = null;
@@ -85,10 +96,16 @@ public class Map
         return hold;
     }
 
-
+    /**
+     * using recursion, we need to check that our randomly generated map allows horses to access all squares
+     * @param tiles the array of randomly generated tiles
+     * @param x current x location
+     * @param y current y location
+     * @return the number of grass tiles horses can locate. Should be equal to the number of grass tiles
+     */
     public int checkMap( Tile[][] tiles, int x, int y )
     {
-        System.out.println( "Check tile at " + x + " " + y );
+        //System.out.println( "Check tile at " + x + " " + y );
         if ( x < 0 || x >= this.x || y < 0 || y >= this.y )
         {
             return 0;
@@ -109,7 +126,15 @@ public class Map
         }
     }
 
-
+    /**
+     * FloodFill to determine where you can go during your turn. 
+     * Uses recursion
+     * @param x location
+     * @param y location
+     * @param spaces how many spaces from the original location is
+     * @param spd the origional chars speed - our ending case is when spaces > spd
+     * @param type the type of the hero - to determine movement for difficult terrain
+     */
     public void makeMoves( int x, int y, int spaces, int spd, String type )
     {
         if ( spaces > spd )
@@ -163,7 +188,9 @@ public class Map
         }
     }
 
-
+    /**
+     * Clears the accessible squares and the tints. To refresh after moving someone.
+     */
     public void clearMoves()
     {
         for ( int i = 0; i < x; i++ )
@@ -183,6 +210,12 @@ public class Map
         }
     }
     
+    /**
+     * Tints the squares you can attack in red
+     * @param xloc x location of hero
+     * @param yloc y location of hero
+     * @param range the range of the weapon
+     */
     public void attackTint(int xloc, int yloc, int range)
     {
         for ( int i = 0; i < x; i++ )
@@ -196,7 +229,10 @@ public class Map
             }
         }
     }
-
+    
+    /**
+     * Simply repaints all the tiles. Call this after any movement
+     */
     public void refreshTiles()
     {
         for ( int i = 0; i < x; i++ )
@@ -208,12 +244,21 @@ public class Map
         }
     }
     
+    /**
+     * returns the array of tiles
+     * @return the array of tiles
+     */
     public Tile[][] getTiles()
     {
         return tiles;
     }
 
-
+    /**
+     * returns a single tile
+     * @param x location
+     * @param y location
+     * @return a tile
+     */
     public Tile getTile( int x, int y )
     {
         return tiles[x][y];
